@@ -1,0 +1,18 @@
+#!/bin/bash
+PROCNAME="rpg"
+clear
+echo "Waiting for game server to start.."
+while true
+do
+  RPID=$(pidof ${PROCNAME})
+  until [ -n "${RPID}" ];
+  do
+      sleep 1
+      RPID=$(pidof ${PROCNAME})
+  done
+  echo "Game is running (3 sec. startup)"
+  sleep 3
+  ./RogueWindows rogue_inventory
+  clear
+  echo "Connection to server lost. Trying to reconnect.."
+done
